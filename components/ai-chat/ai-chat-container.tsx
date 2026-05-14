@@ -64,7 +64,7 @@ export function AIChatContainer() {
     setStatus("typing")
 
     // 模拟AI响应延迟
-    await new Promise((resolve) => setTimeout(resolve, 1500 + Math.random() * 1000))
+    await new Promise((resolve) => setTimeout(resolve, 300 + Math.random() * 200))
 
     const aiResponse: Message = {
       id: (Date.now() + 1).toString(),

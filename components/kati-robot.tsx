@@ -27,16 +27,20 @@ export function KatiRobot({ className }: { className?: string }) {
       <rect x="157" y="95" width="18" height="40" rx="9" fill="#4fb19d" />
       
       {/* 左眼 */}
-      <circle cx="72" cy="112" r="18" fill="#0a0a0c" />
-      <circle cx="72" cy="112" r="14" fill="#4fb19d" />
-      <circle cx="72" cy="112" r="8" fill="#0a0a0c" />
-      <circle cx="68" cy="108" r="3" fill="#ffffff" opacity="0.6" />
+      <g className="animate-blink" style={{ transformOrigin: "72px 112px" }}>
+        <circle cx="72" cy="112" r="18" fill="#0a0a0c" />
+        <circle cx="72" cy="112" r="14" fill="#4fb19d" />
+        <circle cx="72" cy="112" r="8" fill="#0a0a0c" />
+        <circle cx="68" cy="108" r="3" fill="#ffffff" opacity="0.6" />
+      </g>
       
       {/* 右眼 */}
-      <circle cx="128" cy="112" r="18" fill="#0a0a0c" />
-      <circle cx="128" cy="112" r="14" fill="#4fb19d" />
-      <circle cx="128" cy="112" r="8" fill="#0a0a0c" />
-      <circle cx="124" cy="108" r="3" fill="#ffffff" opacity="0.6" />
+      <g className="animate-blink" style={{ transformOrigin: "128px 112px", animationDelay: "0.1s" }}>
+        <circle cx="128" cy="112" r="18" fill="#0a0a0c" />
+        <circle cx="128" cy="112" r="14" fill="#4fb19d" />
+        <circle cx="128" cy="112" r="8" fill="#0a0a0c" />
+        <circle cx="124" cy="108" r="3" fill="#ffffff" opacity="0.6" />
+      </g>
       
       {/* 嘴巴 - 微笑 */}
       <path

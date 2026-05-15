@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
+import Image from "next/image"
 
 interface Message {
   id: string
@@ -11,14 +12,9 @@ interface Message {
 
 export function Terminal() {
   const [messages, setMessages] = useState<Message[]>([])
-  const [input, setInput] = useState("")
   const [isProcessing, setIsProcessing] = useState(false)
-  const inputRef = useRef<HTMLInputElement>(null)
+  const [isRecording, setIsRecording] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    inputRef.current?.focus()
-  }, [])
 
   useEffect(() => {
     if (containerRef.current) {
@@ -26,47 +22,44 @@ export function Terminal() {
     }
   }, [messages])
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!input.trim() || isProcessing) return
+  const handleVoiceStart = () => {
+    setIsRecording(true)
+  }
 
+  const handleVoiceEnd = async () => {
+    setIsRecording(false)
+    
+    // 模拟语音识别结果
+    const mockVoiceInput = "你好"
+    
     const userMessage: Message = {
       id: Date.now().toString(),
       role: "user",
-      content: input.trim(),
+      content: mockVoiceInput,
       timestamp: new Date(),
     }
 
     setMessages((prev) => [...prev, userMessage])
-    setInput("")
     setIsProcessing(true)
 
-    // 模拟AI响应
     await new Promise((resolve) => setTimeout(resolve, 400))
-
-    const responses: Record<string, string> = {
-      "你好": "你好，我是你的智能终端。有什么可以帮助你的？",
-      "购物": "正在为你打开购物模块。你想购买什么商品？",
-      "天气": "今日天气：晴，温度 24°C，空气质量优。",
-    }
 
     const assistantMessage: Message = {
       id: (Date.now() + 1).toString(),
       role: "assistant",
-      content: responses[input.trim()] || `收到指令：${input.trim()}。正在处理中...`,
+      content: "你好！有什么可以帮助你的？",
       timestamp: new Date(),
     }
 
     setMessages((prev) => [...prev, assistantMessage])
     setIsProcessing(false)
-    inputRef.current?.focus()
   }
 
   return (
     <div className="h-[480px] w-[800px] bg-background flex flex-col overflow-hidden relative">
       {/* 背景光效 */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-accent/[0.03] rounded-full blur-[100px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-primary/[0.05] rounded-full blur-[120px]" />
       </div>
 
       {/* 顶部状态栏 */}
@@ -74,7 +67,7 @@ export function Terminal() {
         <div className="flex items-center gap-3">
           <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
           <span className="text-xs font-mono text-muted-foreground tracking-widest uppercase">
-            Terminal Active
+            Online
           </span>
         </div>
         <div className="text-xs font-mono text-muted-foreground tracking-wider">
@@ -88,12 +81,29 @@ export function Terminal() {
         className="relative z-10 flex-1 px-6 overflow-y-auto scrollbar-none"
       >
         {messages.length === 0 ? (
-          <div className="h-full flex flex-col items-center justify-center">
-            <p className="text-2xl font-light text-foreground/90 tracking-tight">
-              有什么可以帮助你？
-            </p>
-            <p className="mt-2 text-sm text-muted-foreground">
-              对话 · 购物 · 控制 · 一切皆可
+          <div className="h-full flex flex-col items-center justify-center gap-4">
+            {/* 机器人头像带动效 */}
+            <div className="relative">
+              {/* 呼吸光环 */}
+              <div className="absolute inset-0 -m-4 bg-primary/20 rounded-full blur-xl animate-pulse" />
+              <div className="absolute inset-0 -m-2 bg-accent/10 rounded-full blur-lg animate-pulse [animation-delay:500ms]" />
+              
+              {/* 机器人图片 */}
+              <div className="relative animate-float">
+                <Image
+                  src="/kati-robot.png"
+                  alt="Kati Robot"
+                  width={140}
+                  height={140}
+                  className="drop-shadow-2xl"
+                  priority
+                />
+              </div>
+            </div>
+            
+            {/* 问候语 */}
+            <p className="text-xl font-light text-foreground/90 tracking-wide mt-2">
+              Hi，我是 Kati
             </p>
           </div>
         ) : (
@@ -129,40 +139,54 @@ export function Terminal() {
         )}
       </div>
 
-      {/* 输入区域 */}
-      <div className="relative z-10 px-6 pb-6 pt-2">
-        <form onSubmit={handleSubmit}>
-          <div className="relative group">
-            <input
-              ref={inputRef}
-              type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder="输入指令..."
-              disabled={isProcessing}
-              className="w-full h-14 bg-secondary/50 border border-border/50 rounded-2xl px-5 pr-14 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 focus:bg-secondary/80 transition-all duration-300 font-light tracking-wide"
-            />
-            <button
-              type="submit"
-              disabled={!input.trim() || isProcessing}
-              className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-xl bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground disabled:opacity-30 disabled:hover:bg-primary/10 disabled:hover:text-primary transition-all duration-300"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="w-5 h-5"
-              >
-                <path d="M5 12h14" />
-                <path d="m12 5 7 7-7 7" />
-              </svg>
-            </button>
-          </div>
-        </form>
+      {/* 语音输入按钮 */}
+      <div className="relative z-10 px-6 pb-8 pt-2 flex justify-center">
+        <button
+          onMouseDown={handleVoiceStart}
+          onMouseUp={handleVoiceEnd}
+          onMouseLeave={() => isRecording && handleVoiceEnd()}
+          onTouchStart={handleVoiceStart}
+          onTouchEnd={handleVoiceEnd}
+          disabled={isProcessing}
+          className={`relative w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300 ${
+            isRecording 
+              ? "bg-primary scale-110" 
+              : "bg-secondary/80 hover:bg-secondary"
+          }`}
+        >
+          {/* 录音时的波纹效果 */}
+          {isRecording && (
+            <>
+              <span className="absolute inset-0 rounded-full bg-primary animate-ping opacity-30" />
+              <span className="absolute inset-[-8px] rounded-full border-2 border-primary/50 animate-pulse" />
+            </>
+          )}
+          
+          {/* 麦克风图标 */}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={`w-6 h-6 transition-colors ${
+              isRecording ? "text-primary-foreground" : "text-muted-foreground"
+            }`}
+          >
+            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" />
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+            <line x1="12" x2="12" y1="19" y2="22" />
+          </svg>
+        </button>
+        
+        {/* 录音提示 */}
+        <p className={`absolute bottom-2 text-xs text-muted-foreground transition-opacity ${
+          isRecording ? "opacity-100" : "opacity-0"
+        }`}>
+          松开发送
+        </p>
       </div>
     </div>
   )

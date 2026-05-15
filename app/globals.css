@@ -4,74 +4,74 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* 基于配色: #8b86be, #deb0bd, #ecb761, #cbd690, #86abba */
-  --background: #1a1a24;
-  --foreground: #f5f5f7;
-  --card: #242432;
-  --card-foreground: #f5f5f7;
-  --popover: #242432;
-  --popover-foreground: #f5f5f7;
-  --primary: #8b86be;
-  --primary-foreground: #ffffff;
-  --secondary: #2d2d3d;
-  --secondary-foreground: #deb0bd;
-  --muted: #2a2a38;
-  --muted-foreground: #86abba;
-  --accent: #ecb761;
-  --accent-foreground: #1a1a24;
+  /* 极简未来终端配色 - 基于 #8b86be, #deb0bd, #ecb761, #cbd690, #86abba */
+  --background: #0a0a0c;
+  --foreground: #fafafa;
+  --card: #111113;
+  --card-foreground: #fafafa;
+  --popover: #111113;
+  --popover-foreground: #fafafa;
+  --primary: #deb0bd;
+  --primary-foreground: #0a0a0c;
+  --secondary: #161618;
+  --secondary-foreground: #a0a0a8;
+  --muted: #1a1a1d;
+  --muted-foreground: #6b6b73;
+  --accent: #8b86be;
+  --accent-foreground: #fafafa;
   --destructive: #e05252;
   --destructive-foreground: #ffffff;
-  --border: #3a3a4d;
-  --input: #2d2d3d;
+  --border: #1f1f23;
+  --input: #161618;
   --ring: #8b86be;
   --chart-1: #8b86be;
   --chart-2: #deb0bd;
   --chart-3: #ecb761;
   --chart-4: #cbd690;
   --chart-5: #86abba;
-  --radius: 0.625rem;
-  --sidebar: #1e1e2a;
-  --sidebar-foreground: #f5f5f7;
-  --sidebar-primary: #8b86be;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #2d2d3d;
-  --sidebar-accent-foreground: #deb0bd;
-  --sidebar-border: #3a3a4d;
+  --radius: 0.75rem;
+  --sidebar: #0d0d0f;
+  --sidebar-foreground: #fafafa;
+  --sidebar-primary: #deb0bd;
+  --sidebar-primary-foreground: #0a0a0c;
+  --sidebar-accent: #161618;
+  --sidebar-accent-foreground: #a0a0a8;
+  --sidebar-border: #1f1f23;
   --sidebar-ring: #8b86be;
 }
 
 .dark {
-  --background: #1a1a24;
-  --foreground: #f5f5f7;
-  --card: #242432;
-  --card-foreground: #f5f5f7;
-  --popover: #242432;
-  --popover-foreground: #f5f5f7;
-  --primary: #8b86be;
-  --primary-foreground: #ffffff;
-  --secondary: #2d2d3d;
-  --secondary-foreground: #deb0bd;
-  --muted: #2a2a38;
-  --muted-foreground: #86abba;
-  --accent: #ecb761;
-  --accent-foreground: #1a1a24;
+  --background: #0a0a0c;
+  --foreground: #fafafa;
+  --card: #111113;
+  --card-foreground: #fafafa;
+  --popover: #111113;
+  --popover-foreground: #fafafa;
+  --primary: #deb0bd;
+  --primary-foreground: #0a0a0c;
+  --secondary: #161618;
+  --secondary-foreground: #a0a0a8;
+  --muted: #1a1a1d;
+  --muted-foreground: #6b6b73;
+  --accent: #8b86be;
+  --accent-foreground: #fafafa;
   --destructive: #e05252;
   --destructive-foreground: #ffffff;
-  --border: #3a3a4d;
-  --input: #2d2d3d;
+  --border: #1f1f23;
+  --input: #161618;
   --ring: #8b86be;
   --chart-1: #8b86be;
   --chart-2: #deb0bd;
   --chart-3: #ecb761;
   --chart-4: #cbd690;
   --chart-5: #86abba;
-  --sidebar: #1e1e2a;
-  --sidebar-foreground: #f5f5f7;
-  --sidebar-primary: #8b86be;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #2d2d3d;
-  --sidebar-accent-foreground: #deb0bd;
-  --sidebar-border: #3a3a4d;
+  --sidebar: #0d0d0f;
+  --sidebar-foreground: #fafafa;
+  --sidebar-primary: #deb0bd;
+  --sidebar-primary-foreground: #0a0a0c;
+  --sidebar-accent: #161618;
+  --sidebar-accent-foreground: #a0a0a8;
+  --sidebar-border: #1f1f23;
   --sidebar-ring: #8b86be;
 }
 
@@ -123,4 +123,18 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* 机器人浮动动画 */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
 }

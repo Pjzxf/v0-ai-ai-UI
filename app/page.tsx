@@ -1,9 +1,9 @@
-import { AIChatContainer } from "@/components/ai-chat"
+import { Terminal } from "@/components/terminal"
 
 export default function HomePage() {
   return (
-    <main className="flex min-h-screen items-center justify-center p-4 bg-background">
-      <AIChatContainer />
+    <main className="min-h-screen flex items-center justify-center bg-background">
+      <Terminal />
     </main>
   )
 }

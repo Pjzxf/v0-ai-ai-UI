@@ -26,21 +26,67 @@ export function KatiRobot({ className }: { className?: string }) {
       <rect x="25" y="95" width="18" height="40" rx="9" fill="#4fb19d" />
       <rect x="157" y="95" width="18" height="40" rx="9" fill="#4fb19d" />
       
-      {/* 左眼 */}
-      <g className="animate-blink" style={{ transformOrigin: "72px 112px" }}>
-        <circle cx="72" cy="112" r="18" fill="#0a0a0c" />
-        <circle cx="72" cy="112" r="14" fill="#4fb19d" />
-        <circle cx="72" cy="112" r="8" fill="#0a0a0c" />
-        <circle cx="68" cy="108" r="3" fill="#ffffff" opacity="0.6" />
-      </g>
+      {/* 左眼 - 眼眶 */}
+      <circle cx="72" cy="112" r="18" fill="#0a0a0c" />
+      {/* 左眼 - 眼球（带眨眼动画） */}
+      <ellipse cx="72" cy="112" rx="14" ry="14" fill="#4fb19d">
+        <animate 
+          attributeName="ry" 
+          values="14;14;2;14;14" 
+          keyTimes="0;0.45;0.5;0.55;1"
+          dur="4s" 
+          repeatCount="indefinite" 
+        />
+      </ellipse>
+      <ellipse cx="72" cy="112" rx="8" ry="8" fill="#0a0a0c">
+        <animate 
+          attributeName="ry" 
+          values="8;8;1;8;8" 
+          keyTimes="0;0.45;0.5;0.55;1"
+          dur="4s" 
+          repeatCount="indefinite" 
+        />
+      </ellipse>
+      <ellipse cx="68" cy="108" rx="3" ry="3" fill="#ffffff" opacity="0.6">
+        <animate 
+          attributeName="ry" 
+          values="3;3;0.5;3;3" 
+          keyTimes="0;0.45;0.5;0.55;1"
+          dur="4s" 
+          repeatCount="indefinite" 
+        />
+      </ellipse>
       
-      {/* 右眼 */}
-      <g className="animate-blink" style={{ transformOrigin: "128px 112px", animationDelay: "0.1s" }}>
-        <circle cx="128" cy="112" r="18" fill="#0a0a0c" />
-        <circle cx="128" cy="112" r="14" fill="#4fb19d" />
-        <circle cx="128" cy="112" r="8" fill="#0a0a0c" />
-        <circle cx="124" cy="108" r="3" fill="#ffffff" opacity="0.6" />
-      </g>
+      {/* 右眼 - 眼眶 */}
+      <circle cx="128" cy="112" r="18" fill="#0a0a0c" />
+      {/* 右眼 - 眼球（带眨眼动画，略有延迟） */}
+      <ellipse cx="128" cy="112" rx="14" ry="14" fill="#4fb19d">
+        <animate 
+          attributeName="ry" 
+          values="14;14;2;14;14" 
+          keyTimes="0;0.46;0.51;0.56;1"
+          dur="4s" 
+          repeatCount="indefinite" 
+        />
+      </ellipse>
+      <ellipse cx="128" cy="112" rx="8" ry="8" fill="#0a0a0c">
+        <animate 
+          attributeName="ry" 
+          values="8;8;1;8;8" 
+          keyTimes="0;0.46;0.51;0.56;1"
+          dur="4s" 
+          repeatCount="indefinite" 
+        />
+      </ellipse>
+      <ellipse cx="124" cy="108" rx="3" ry="3" fill="#ffffff" opacity="0.6">
+        <animate 
+          attributeName="ry" 
+          values="3;3;0.5;3;3" 
+          keyTimes="0;0.46;0.51;0.56;1"
+          dur="4s" 
+          repeatCount="indefinite" 
+        />
+      </ellipse>
       
       {/* 嘴巴 - 微笑 */}
       <path

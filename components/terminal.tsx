@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import Image from "next/image"
+import { KatiRobot } from "./kati-robot"
 
 interface Message {
   id: string
@@ -88,32 +88,9 @@ export function Terminal() {
               <div className="absolute inset-0 -m-4 bg-primary/20 rounded-full blur-xl animate-pulse" />
               <div className="absolute inset-0 -m-2 bg-accent/10 rounded-full blur-lg animate-pulse [animation-delay:500ms]" />
               
-              {/* 飘动的气泡 */}
-              <div className="absolute -top-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1">
-                <span 
-                  className="w-3 h-3 rounded-full bg-[#ecb761] animate-bubble opacity-90"
-                  style={{ animationDelay: "0ms" }}
-                />
-                <span 
-                  className="w-2.5 h-2.5 rounded-full bg-[#ecb761] animate-bubble opacity-80"
-                  style={{ animationDelay: "300ms" }}
-                />
-                <span 
-                  className="w-2 h-2 rounded-full bg-[#ecb761] animate-bubble opacity-70"
-                  style={{ animationDelay: "600ms" }}
-                />
-              </div>
-              
-              {/* 机器人图片 */}
+              {/* 机器人SVG - 气泡可独立动画 */}
               <div className="relative animate-float">
-                <Image
-                  src="/kati-robot.png"
-                  alt="Kati Robot"
-                  width={140}
-                  height={140}
-                  className="drop-shadow-2xl"
-                  priority
-                />
+                <KatiRobot className="w-[160px] h-[160px] drop-shadow-2xl" />
               </div>
             </div>
             
